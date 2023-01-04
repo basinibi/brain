@@ -33,7 +33,6 @@ class SingleLinkedList{
 
 
     insert(node, newValue){                                              // insert는 중간에 삽입하는 함수이다
-        console.log(`앞 노드  : ${node}, 삽입할 값 : ${newValue}`)
         const newNode = new Node(newValue);                              // 새로운 노드 생성
         newNode.next = node.next;                                        // 새로운 노드의 다음 노드 = 기존 노드의 다음 노드
         node.next = newNode;                                             // 기존에 만들어진 노드 = 새로 만든 노드
@@ -52,7 +51,6 @@ class SingleLinkedList{
                 }                                                        // 반복이 끝나면 삭제할 노드의 이전 노드를 알 수 있다.
 
                 if(prevNode.next.next === null){                     // 삭제할 노드가 마지막 노드라면
-                    console.log("여기 들어오니?", prevNode)
                     prevNode.next = null;
                     this.tail =  prevNode
                 }else{
@@ -61,23 +59,39 @@ class SingleLinkedList{
             }
         }
     }
+
+    display(){
+        let currNode = this.head;
+        let displayString = "[";
+        while (currNode !== null){
+            displayString += `${currNode.value}, `
+            currNode = currNode.next;
+        }
+        displayString = displayString.substr(0, displayString.length -2);
+        displayString += "]";
+        console.log(displayString)
+    }
+
+
 }
 
 const linkedList = new SingleLinkedList()
 linkedList.append(1)
-console.log("1 삽입 : ",linkedList)
 linkedList.append(2)
-console.log("2 삽입 : ",linkedList)
 linkedList.append(4)
-console.log("4 삽입 : ",linkedList)
 linkedList.append(5)
-console.log("5 삽입 : ",linkedList)
-console.log("값 찾기 : ",linkedList.find(2))
+linkedList.display();
 linkedList.insert(linkedList.find(2), 3)
-console.log("중간값 삽입 : ",linkedList)
-linkedList.remove(1)
-console.log("헤드 삭제 : ",linkedList)
+linkedList.display();
+linkedList.remove(1);
+console.log("헤드 삭제");
+linkedList.display();
 linkedList.remove(3)
-console.log("중간 삭제 : ",linkedList)
+console.log("중간 삭제")
+linkedList.display();
 linkedList.remove(5)
-console.log("마지막 삭제 : ",linkedList)
+console.log("마지막 삭제")
+linkedList.display();
+
+
+
